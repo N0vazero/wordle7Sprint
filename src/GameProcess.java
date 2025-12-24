@@ -6,6 +6,7 @@ public class GameProcess {
     private Scanner scanner = new Scanner(System.in);
     private String wordNotCompliesRequirements = "Введенное слово не соответствует требованиям, введите заново:";
     private String turnsRemainsMessage = "Ходов осталось: ";
+    private String loseMessage = "Вы проиграли! Загаданное слово: ";
 
     public GameProcess(HashSet<String> dict) {
         this.dict = (HashSet<String>) dict.clone();
@@ -43,6 +44,7 @@ public class GameProcess {
             turns--;
             print(turnsRemainsMessage + turns);
         }
+        print(loseMessage + targetWord);
 
     }
 
@@ -90,7 +92,7 @@ public class GameProcess {
     }
 
     private String getCongratulation() {
-        return "Поздравляем, вы победили, хотите попробовать еще раз? Y/N";
+        return "Поздравляем, вы победили!";
     }
 
     private void print(Object o) {

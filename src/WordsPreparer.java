@@ -1,3 +1,5 @@
+import exception.WorkWithFileErrorException;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -22,7 +24,7 @@ public class WordsPreparer {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new WorkWithFileErrorException(e.getMessage());
         }
         return words;
     }
@@ -36,7 +38,7 @@ public class WordsPreparer {
                 word = words.poll();
             }
         } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new WorkWithFileErrorException(e.getMessage());
         }
     }
 

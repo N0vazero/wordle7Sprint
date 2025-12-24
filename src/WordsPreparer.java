@@ -1,6 +1,7 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -39,7 +40,7 @@ public class WordsPreparer {
         }
     }
 
-    private static LinkedList<String> fixWords(LinkedList<String> words) {
+    private static LinkedList<String> getWords(LinkedList<String> words) {
         LinkedList<String> newWords = new LinkedList<>();
         String word = words.poll();
         while (word != null) {
@@ -47,14 +48,23 @@ public class WordsPreparer {
             while (word.contains("ё")) {
                 word = word.replace("ё", "е");
             }
-            newWords.add(word);
+            if (word.length() == 5) {
+                newWords.add(word);
+            }
             word = words.poll();
         }
         return newWords;
     }
 
-    public static void run() {
-        writeToFile(fixWords(loadFromFile()));
+    public static HashSet<String> getDictionary() {
+        LinkedList<String> words = getWords(loadFromFile());
+        HashSet<String> dict = new HashSet<>();
+        String word = words.poll();
+        while (word != null) {
+            dict.add(word);
+            word = words.poll();
+        }
+        return dict;
     }
 
     private static boolean notVoid(String line) {

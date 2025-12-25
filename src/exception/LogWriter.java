@@ -22,7 +22,7 @@ public class LogWriter {
             writer.newLine();
             writer.write(excp.getMessage());
             writer.newLine();
-            for (StackTraceElement el :excp.getStackTrace()) {
+            for (StackTraceElement el : excp.getStackTrace()) {
                 writer.write(el.toString());
                 writer.newLine();
             }

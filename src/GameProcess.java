@@ -1,19 +1,18 @@
 import java.util.*;
 
 public class GameProcess {
-    private String targetWord;
-    private HashSet<String> dict;
-    private Scanner scanner = new Scanner(System.in);
-    private String wordNotCompliesRequirements = "Введенное слово не соответствует требованиям, введите заново:";
-    private String turnsRemainsMessage = "Ходов осталось: ";
-    private String loseMessage = "Вы проиграли! Загаданное слово: ";
+    protected String targetWord;
+    protected HashSet<String> dict;
+    protected Scanner scanner = new Scanner(System.in);
+    protected String wordNotCompliesRequirements = "Введенное слово не соответствует требованиям, введите заново:";
+    protected String turnsRemainsMessage = "Ходов осталось: ";
+    protected String loseMessage = "Вы проиграли! Загаданное слово: ";
 
     public GameProcess(HashSet<String> dict) {
         this.dict = (HashSet<String>) dict.clone();
-        targetWord = getRandomWord();
     }
 
-    private String getRandomWord() {
+    protected String getRandomWord() {
         ArrayList<String> arr = new ArrayList<>();
         for (String st : dict) {
             arr.add(st);
@@ -23,6 +22,7 @@ public class GameProcess {
     }
 
     public void game() {
+        targetWord = getRandomWord();
         int turns = 6;
         print(getGreeting());
         while (turns > 0) {
@@ -48,15 +48,15 @@ public class GameProcess {
 
     }
 
-    private boolean compareWords(String word, String targetWord) {
+    protected boolean compareWords(String word, String targetWord) {
         return targetWord.equals(word);
     }
 
-    private boolean checkContains(String word) {
+    protected boolean checkContains(String word) {
         return dict.contains(word);
     }
 
-    private String getTip(String word) {
+    protected String getTip(String word) {
         StringBuilder tipB = new StringBuilder();
         if (word.length() == targetWord.length()) {
             for (int i = 0; i < word.length(); i++) {
@@ -76,12 +76,12 @@ public class GameProcess {
         }
     }
 
-    private String requestWord() {
+    protected String requestWord() {
         String input = scanner.nextLine();
         return input;
     }
 
-    private String getGreeting() {
+    protected String getGreeting() {
         return "Хола, слово из 5 букв загадано, пожалуйста, введите в консоль слова, чтобы получать подсказки.\n"
                 + "Для введенного слова вы получите подсказку-шифр, где '+' означает, что буква угадана верно, '-' - неверно\n"
                 + "'^' - что буква присутствует в загаданном слове, но на другой позиции.\n"
@@ -91,11 +91,11 @@ public class GameProcess {
                 + targetWord;
     }
 
-    private String getCongratulation() {
+    protected String getCongratulation() {
         return "Поздравляем, вы победили!";
     }
 
-    private void print(Object o) {
+    protected void print(Object o) {
         System.out.println(o);
     }
 }
